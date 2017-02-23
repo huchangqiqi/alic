@@ -5,4 +5,7 @@
 #include "Object.h"
 
 namespace alpha {
+//    Object::Object(Process *const &process, object::Type *const &type) :
+//            process(process),
+//            {}
 }

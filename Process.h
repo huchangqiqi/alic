@@ -5,6 +5,7 @@
 #pragma once
 
 #include "alic.h"
+#include "Object.h"
 
 namespace alpha {
     class Process {
