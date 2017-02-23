@@ -1,0 +1,3 @@
+[submodule "number-generator"]
+	path = number-generator
+	url = https://github.com/ai-artisan/cpp.number-generator.git
