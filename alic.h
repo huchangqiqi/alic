@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "number-generator/number_generator.hpp"
+
 namespace alpha {
     class Process;
 
@@ -15,3 +17,7 @@ namespace alpha {
 
     class Variable;
 }
+
+#include "Variable.h"
+#include "Object.h"
+#include "Process.h"

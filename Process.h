@@ -5,11 +5,12 @@
 #pragma once
 
 #include "alic.h"
-#include "Object.h"
 
 namespace alpha {
     class Process {
     public:
+        NumberGenerator object_ng;
+
         object::Type
                 *const type_type,
                 *const null_type,
