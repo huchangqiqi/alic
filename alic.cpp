@@ -2,9 +2,11 @@
 // Created by kalo on 2017/2/23.
 //
 
-#include "Process.cpp"
-#include "Object.cpp"
+#include "Functions.cpp"
+#include "Ejecta.cpp"
 #include "Variable.cpp"
+#include "Object.cpp"
+#include "Process.cpp"
 
 namespace alpha {
     Process *useProcess(Process *const &new_process) {
@@ -18,4 +20,4 @@ namespace alpha {
     }
 }
 
-#include "macros.cpp"
+#include "MACROS.cpp"

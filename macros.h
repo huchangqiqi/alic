@@ -7,5 +7,5 @@
 #define FUNCTION(NAME) Object * NAME(\
     object::Scope *const &calling_scene,\
     Object *const &arguments,\
-    Object *&ejecta\
+    Ejecta *&ejecta\
 )

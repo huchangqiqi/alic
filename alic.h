@@ -11,7 +11,7 @@
 
 #include "number-generator/number_generator.hpp"
 
-#include "macros.h"
+#include "MACROS.h"
 
 namespace alpha {
     class Process;
@@ -55,6 +55,17 @@ namespace alpha {
 
     class Variable;
 
+    class Ejecta;
+    namespace ejecta {
+        class Break;
+
+        class Throw;
+
+        class Return;
+
+        class Exit;
+    }
+
     class Functions;
 
     inline Process *useProcess(Process *const &);
@@ -62,7 +73,8 @@ namespace alpha {
     inline void rollbackProcess(Process *const &);
 }
 
-#include "Functions.h"
-#include "Variable.h"
-#include "Object.h"
 #include "Process.h"
+#include "Object.h"
+#include "Variable.h"
+#include "Ejecta.h"
+#include "Functions.h"

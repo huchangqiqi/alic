@@ -11,6 +11,8 @@ namespace alpha {
         virtual ~Functions() = 0;
 
     public:
+        static Process *&process;
+
         class Constructors {
             virtual ~Constructors() = 0;
 
