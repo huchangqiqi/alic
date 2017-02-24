@@ -11,6 +11,8 @@
 
 #include "number-generator/number_generator.hpp"
 
+#include "macros.h"
+
 namespace alpha {
     class Process;
 
@@ -53,11 +55,14 @@ namespace alpha {
 
     class Variable;
 
+    class Functions;
+
     inline Process *useProcess(Process *const &);
 
     inline void rollbackProcess(Process *const &);
 }
 
+#include "Functions.h"
 #include "Variable.h"
 #include "Object.h"
 #include "Process.h"

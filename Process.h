@@ -30,6 +30,12 @@ namespace alpha {
         object::Scope *global;
 
         std::unordered_map<std::string, Variable *> variables;
+
+        /**
+         * Monitor the life cycle
+         */
+        std::unordered_map<unsigned, Object *> object_statistics;
+        std::unordered_map<std::string, Variable *> variable_statistics;
     public:
         Process();
 

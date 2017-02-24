@@ -30,18 +30,23 @@ namespace alpha {
     Object::Object(object::Type *const &type) :
             sn(process->object_ng.generate()),
             type(bound(type)),
-            binding_times(0) {}
+            binding_times(0) {
+        process->object_statistics[sn] = this;
+    }
 
     Object::~Object() {
+        process->object_statistics.erase(sn);
+        if (release(type)) type = NULL;
         process->object_ng.recycle(sn);
         sn = 0;
-        if (release(type)) type = NULL;
     }
 
     Object::Object() :
             sn(process->object_ng.generate()),
             type(NULL),
-            binding_times(0) {}
+            binding_times(0) {
+        process->object_statistics[sn] = this;
+    }
 
     namespace object {
         Type::Type(Procedure *const &constructor) :
@@ -148,7 +153,7 @@ namespace alpha {
 
         Scope::~Scope() {
             if (release(base)) base = NULL;
-            
+
             for (auto i = variables.begin(); i != variables.end(); i++) {
                 auto variable = i->second;
                 auto j = variable->values.find(sn);

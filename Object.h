@@ -112,11 +112,7 @@ namespace alpha {
 
         class Procedure : public Object {
         public:
-            typedef Object *(*const Value)(
-                    Scope *const &,     //caller scene
-                    Object *const &,    //arguments
-                    Object *&           //ejected object
-            );
+            typedef FUNCTION((*const Value));
 
             const Value value;
 

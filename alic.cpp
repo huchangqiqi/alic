@@ -17,3 +17,5 @@ namespace alpha {
         Process::process = process_backup;
     }
 }
+
+#include "macros.cpp"
