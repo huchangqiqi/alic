@@ -9,26 +9,28 @@
 namespace alpha {
     class Process {
     public:
+        static Process *process;
+
         NumberGenerator object_ng, variable_ng;
 
         object::Type
-                *const type_type,
-                *const null_type,
-                *const boolean_type,
-                *const number_type,
-                *const character_type,
-                *const pair_type,
-                *const vector_type,
-                *const string_type,
-                *const identifier_type,
-                *const procedure_type,
-                *const scope_type;
-        object::Null *const null;
-        object::Boolean *const true_, *const false_;
-        object::Scope *const global;
+                *type_type,
+                *null_type,
+                *boolean_type,
+                *number_type,
+                *character_type,
+                *pair_type,
+                *vector_type,
+                *string_type,
+                *identifier_type,
+                *procedure_type,
+                *scope_type;
+        object::Null *null;
+        object::Boolean *true_, *false_;
+        object::Scope *global;
 
         std::unordered_map<std::string, Variable *> variables;
-
+    public:
         Process();
 
         ~Process();

@@ -5,6 +5,8 @@
 #include "Variable.h"
 
 namespace alpha {
+    Process *&Variable::process = Process::process;
+
     bool Variable::release(Variable *variable) {
         if (variable->identifier_binding_times || variable->values.size())return false;
         else {

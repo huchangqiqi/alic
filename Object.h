@@ -9,32 +9,45 @@
 namespace alpha {
     class Object {
     public:
+        static Process *&process;
+
         static inline bool release(Object *, const unsigned &n = 1);
 
         template<typename T>
         static inline T *bound(T *const &, const unsigned &n = 1);
 
-    protected:
         unsigned sn;
         object::Type *type;
         unsigned binding_times;
-    public:
+
         Object(object::Type *const &);
 
         virtual ~Object() = 0;
+
+        /**
+         * for Type()
+         */
+        Object();
     };
 
     namespace object {
         class Type : public Object {
-        protected:
-            Procedure *constructor;
+
         public:
+            Procedure *constructor;
+
             Type(Procedure *const &);
 
             ~Type();
+
+            /**
+             * for Process::type_type, Process::procedure_type
+             */
+            Type();
         };
 
         class Null : public Object {
+
         public:
             Null();
         };
@@ -61,37 +74,37 @@ namespace alpha {
         };
 
         class Pair : public Object {
-        protected:
+        public:
             Object *car;
             Object *cdr;
-        public:
+
             Pair();
 
             ~Pair();
         };
 
         class Vector : public Object {
-        protected:
-            std::vector<Object *> value;
         public:
+            std::vector<Object *> value;
+
             Vector(const unsigned &);
 
             ~Vector();
         };
 
         class String : public Object {
-        protected:
-            std::string value;
         public:
+            std::string value;
+
             String(const unsigned &);
         };
 
         class Identifier : public Object {
         public:
             const std::string string;
-        protected:
+
             Variable *variable;
-        public:
+
             Identifier(const std::string &);
 
             ~Identifier();
@@ -112,12 +125,12 @@ namespace alpha {
 
         namespace procedure {
             class Custom : public Procedure {
-            protected:
+            public:
                 Scope *definition_scene;
                 Identifier *scene_parameter;
                 Identifier *arguments_parameter;
                 Object *execution_body;
-            public:
+
                 Custom(
                         Scope *const &,         //definition scene
                         Identifier *const &,    //scene parameter
@@ -137,9 +150,9 @@ namespace alpha {
             };
 
             class Accessor : public Custom {
-            protected:
-                Type *target_type;
             public:
+                Type *target_type;
+
                 Accessor(
                         Scope *const &,
                         Identifier *const &,
@@ -153,13 +166,18 @@ namespace alpha {
         }
 
         class Scope : public Object {
-        protected:
+        public:
             Scope *base;
             std::unordered_map<unsigned, Variable *> variables;
-        public:
+
             Scope(Scope *const);
 
             ~Scope();
+
+            /**
+             * for global
+             */
+            Scope();
         };
 
         class Custom : public Object {

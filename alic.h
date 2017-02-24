@@ -1,6 +1,6 @@
-//
-// Created by kalo on 2017/2/23.
-//
+/**
+ * Alpha interpreter based on C++
+ */
 
 #pragma once
 
@@ -13,8 +13,6 @@
 
 namespace alpha {
     class Process;
-
-    Process *process;
 
     class Object;
     namespace object {
@@ -54,6 +52,10 @@ namespace alpha {
     }
 
     class Variable;
+
+    inline Process *useProcess(Process *const &);
+
+    inline void rollbackProcess(Process *const &);
 }
 
 #include "Variable.h"

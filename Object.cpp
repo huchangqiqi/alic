@@ -5,6 +5,8 @@
 #include "Object.h"
 
 namespace alpha {
+    Process *&Object::process = Process::process;
+
     bool Object::release(Object *object, unsigned const &n) {
         if (object) {
             if (object->binding_times) object->binding_times -= n;
@@ -27,7 +29,7 @@ namespace alpha {
 
     Object::Object(object::Type *const &type) :
             sn(process->object_ng.generate()),
-            type(type),
+            type(bound(type)),
             binding_times(0) {}
 
     Object::~Object() {
@@ -36,32 +38,41 @@ namespace alpha {
         if (release(type)) type = NULL;
     }
 
+    Object::Object() :
+            sn(process->object_ng.generate()),
+            type(NULL),
+            binding_times(0) {}
+
     namespace object {
         Type::Type(Procedure *const &constructor) :
-                Object(bound(process->type_type)),
+                Object(process->type_type),
                 constructor(constructor) {}
 
         Type::~Type() {
             if (release(constructor)) constructor = NULL;
         }
 
+        Type::Type() :
+                Object(),
+                constructor(NULL) {}
+
         Null::Null() :
-                Object(bound(process->null_type)) {}
+                Object(process->null_type) {}
 
         Boolean::Boolean(const bool &value) :
-                Object(bound(process->boolean_type)),
+                Object(process->boolean_type),
                 value(value) {}
 
         Number::Number(const double &value) :
-                Object(bound(process->number_type)),
+                Object(process->number_type),
                 value(value) {}
 
         Character::Character(const char &value) :
-                Object(bound(process->character_type)),
+                Object(process->character_type),
                 value(value) {}
 
         Pair::Pair() :
-                Object(bound(process->pair_type)),
+                Object(process->pair_type),
                 car(bound(process->null)),
                 cdr(bound(process->null)) {}
 
@@ -71,10 +82,8 @@ namespace alpha {
         }
 
         Vector::Vector(const unsigned &size) :
-                Object(bound(process->vector_type)),
-                value(std::vector<Object *>(size, process->null)) {
-            bound(process->null, size);
-        }
+                Object(process->vector_type),
+                value(std::vector<Object *>(size, bound(process->null, size))) {}
 
         Vector::~Vector() {
             for (auto i = value.begin(); i != value.end(); i++) {
@@ -99,20 +108,20 @@ namespace alpha {
         }
 
         Procedure::Procedure(const Value &value) :
-                Object(bound(process->procedure_type)),
+                Object(process->procedure_type),
                 value(value) {}
 
         namespace procedure {
             Custom::Custom(Scope *const &definition_scene, Identifier *const &scene_parameter, Identifier *const &arguments_parameter, Object *const &execution_body) :
                     Procedure(NULL),
-                    definition_scene(definition_scene),
+                    definition_scene(bound(definition_scene)),
                     scene_parameter(bound(scene_parameter)),
                     arguments_parameter(bound(arguments_parameter)),
                     execution_body(bound(execution_body)) {}
 
             Custom::Custom(const Value &value, Scope *const &definition_scene, Identifier *const &scene_parameter, Identifier *const &arguments_parameter, Object *const &execution_body) :
                     Procedure(value),
-                    definition_scene(definition_scene),
+                    definition_scene(bound(definition_scene)),
                     scene_parameter(bound(scene_parameter)),
                     arguments_parameter(bound(arguments_parameter)),
                     execution_body(bound(execution_body)) {}
@@ -126,7 +135,7 @@ namespace alpha {
 
             Accessor::Accessor(Scope *const &definition_scene, Identifier *const &scene_parameter, Identifier *const &arguments_parameter, Object *const &execution_body, Type *const &target_type) :
                     Custom(NULL, definition_scene, scene_parameter, arguments_parameter, execution_body),
-                    target_type(target_type) {}
+                    target_type(bound(target_type)) {}
 
             Accessor::~Accessor() {
                 if (release(target_type)) target_type = NULL;
@@ -135,9 +144,11 @@ namespace alpha {
 
         Scope::Scope(Scope *const base) :
                 Object(process->scope_type),
-                base(base) {}
+                base(bound(base)) {}
 
         Scope::~Scope() {
+            if (release(base)) base = NULL;
+            
             for (auto i = variables.begin(); i != variables.end(); i++) {
                 auto variable = i->second;
                 auto j = variable->values.find(sn);
@@ -150,5 +161,9 @@ namespace alpha {
                 }
             }
         }
+
+        Scope::Scope() :
+                Object(process->scope_type),
+                base(NULL) {}
     }
 }
