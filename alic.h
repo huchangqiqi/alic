@@ -6,6 +6,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "number-generator/number_generator.hpp"
@@ -13,7 +14,44 @@
 namespace alpha {
     class Process;
 
+    Process *process;
+
     class Object;
+    namespace object {
+        class Type;
+
+        class Null;
+
+        class Boolean;
+
+        //class Byte;
+
+        class Number;
+
+        class Character;
+
+        class Pair;
+
+        //class ByteVector;
+
+        class Vector;
+
+        class String;
+
+        class Identifier;
+
+        class Procedure;
+
+        namespace procedure {
+            class Custom;
+
+            class Accessor;
+        }
+
+        class Scope;
+
+        class Custom;
+    }
 
     class Variable;
 }

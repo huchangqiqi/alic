@@ -7,131 +7,99 @@
 #include "alic.h"
 
 namespace alpha {
-    namespace object {
-        class Type;
-
-        class Null;
-
-        class Boolean;
-
-        //class Byte;
-
-        class Number;
-
-        class Character;
-
-        class Pair;
-
-        //class ByteVector;
-
-        class Vector;
-
-        class String;
-
-        class Identifier;
-
-        class Procedure;
-
-        namespace procedure {
-            class Custom;
-
-            class Accessor;
-        }
-
-        class Scope;
-
-        class Custom;
-    }
-
     class Object {
     public:
-        Process *const process;
-        const unsigned sn;
-        object::Type *const type;
-        unsigned referred_times;
+        static inline bool release(Object *, const unsigned &n = 1);
 
+        template<typename T>
+        static inline T *bound(T *const &, const unsigned &n = 1);
 
-        Object(Process *const &, object::Type *const &);
+    protected:
+        unsigned sn;
+        object::Type *type;
+        unsigned binding_times;
+    public:
+        Object(object::Type *const &);
 
         virtual ~Object() = 0;
     };
 
     namespace object {
         class Type : public Object {
+        protected:
+            Procedure *constructor;
         public:
-            Procedure *const constructor;
-
-            Type(Process *const &, Procedure *const &);
+            Type(Procedure *const &);
 
             ~Type();
         };
 
         class Null : public Object {
         public:
-            Null(Process *const &);
+            Null();
         };
 
         class Boolean : public Object {
         public:
             const bool value;
 
-            Boolean(Process *const &, const bool &);
+            Boolean(const bool &);
         };
 
         class Number : public Object {
         public:
             const double value;
 
-            Number(Process *const, const double &);
+            Number(const double &);
         };
 
         class Character : public Object {
         public:
             const char value;
 
-            Character(Process *const &, const char &);
+            Character(const char &);
         };
 
         class Pair : public Object {
-        public:
+        protected:
             Object *car;
             Object *cdr;
-
-            Pair(Process *const);
+        public:
+            Pair();
 
             ~Pair();
         };
 
         class Vector : public Object {
+        protected:
+            std::vector<Object *> value;
         public:
-            std::vector<Object *> vector;
-
-            Vector(Process *const &, const unsigned &);
+            Vector(const unsigned &);
 
             ~Vector();
         };
 
         class String : public Object {
-        public:
+        protected:
             std::string value;
-
-            String(Process *const &, const unsigned &);
-
-            ~String();
+        public:
+            String(const unsigned &);
         };
 
         class Identifier : public Object {
         public:
             const std::string string;
+        protected:
             Variable *variable;
+        public:
+            Identifier(const std::string &);
 
-            Identifier(Process *const &, const std::string &);
+            ~Identifier();
         };
 
         class Procedure : public Object {
         public:
-            typedef Object *(*Value)(
-                    Process *const &,
+            typedef Object *(*const Value)(
                     Scope *const &,     //caller scene
                     Object *const &,    //arguments
                     Object *&           //ejected object
@@ -139,20 +107,26 @@ namespace alpha {
 
             const Value value;
 
-            Procedure(Process *const &, const Value &);
+            Procedure(const Value &);
         };
 
         namespace procedure {
-
             class Custom : public Procedure {
+            protected:
+                Scope *definition_scene;
+                Identifier *scene_parameter;
+                Identifier *arguments_parameter;
+                Object *execution_body;
             public:
-                Scope *const definition_scene;
-                Identifier *const scene_parameter;
-                Identifier *const arguments_parameter;
-                Object *const execution_body;
+                Custom(
+                        Scope *const &,         //definition scene
+                        Identifier *const &,    //scene parameter
+                        Identifier *const &,    //arguments parameter
+                        Object *const &         //execution body
+                );
 
                 Custom(
-                        Process *const &,
+                        const Value &,
                         Scope *const &,         //definition scene
                         Identifier *const &,    //scene parameter
                         Identifier *const &,    //arguments parameter
@@ -163,16 +137,15 @@ namespace alpha {
             };
 
             class Accessor : public Custom {
+            protected:
+                Type *target_type;
             public:
-                Type *const target_type;
-
                 Accessor(
-                        Process *const &,
                         Scope *const &,
                         Identifier *const &,
                         Identifier *const &,
                         Object *const &,
-                        Type *const *&            //target type
+                        Type *const &           //target type
                 );
 
                 ~Accessor();
@@ -180,10 +153,11 @@ namespace alpha {
         }
 
         class Scope : public Object {
+        protected:
+            Scope *base;
+            std::unordered_map<unsigned, Variable *> variables;
         public:
-            Scope *const base;
-
-            Scope(Process *const &, Scope *const);
+            Scope(Scope *const);
 
             ~Scope();
         };
@@ -192,7 +166,7 @@ namespace alpha {
         public:
             Object *const data;
 
-            Custom(Process *const &, Object *const);
+            Custom(Object *const);
 
             ~Custom();
         };

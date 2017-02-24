@@ -9,7 +9,7 @@
 namespace alpha {
     class Process {
     public:
-        NumberGenerator object_ng;
+        NumberGenerator object_ng, variable_ng;
 
         object::Type
                 *const type_type,
@@ -24,7 +24,7 @@ namespace alpha {
                 *const procedure_type,
                 *const scope_type;
         object::Null *const null;
-        object::Boolean *const boolean_true, *const boolean_false;
+        object::Boolean *const true_, *const false_;
         object::Scope *const global;
 
         std::unordered_map<std::string, Variable *> variables;
