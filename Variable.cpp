@@ -24,7 +24,7 @@ namespace alpha {
                     process->variables.insert(
                             std::make_pair<std::string, Variable *>(
                                     static_cast<std::string>(name),
-                                    this
+                                    static_cast<Variable *>(this)
                             )
                     ).first
             ),

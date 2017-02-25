@@ -2,7 +2,7 @@
 // Created by kalo on 2017/2/23.
 //
 
-#include "process.h"
+#include "Process.h"
 
 namespace alpha {
     Process *Process::process = NULL;
@@ -75,10 +75,10 @@ namespace alpha {
 
         rollbackProcess(process_backup);
 
-        std::cout << object_statistics.size() << std::endl;
-        for (auto i = object_statistics.begin(); i != object_statistics.end(); i++) {
-            std::cout << i->second->sn << " ";
-        }
-        std::cout << std::endl;
+        std::cout << std::endl << "objects not been destroyed: " << object_statistics.size() << std::endl;
+//        for (auto i = object_statistics.begin(); i != object_statistics.end(); i++) {
+//            std::cout << i->second->sn << " ";
+//        }
+//        std::cout << std::endl;
     }
 }

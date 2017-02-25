@@ -18,6 +18,8 @@ namespace alpha {
 
     class Object;
     namespace object {
+        using Object=Object;
+
         class Type;
 
         class Null;
@@ -65,8 +67,6 @@ namespace alpha {
 
         class Exit;
     }
-
-    class Functions;
 
     inline Process *useProcess(Process *const &);
 

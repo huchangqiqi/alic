@@ -98,6 +98,9 @@ namespace alpha {
 
             String(const unsigned &);
 
+            /**
+             * for constant message
+             */
             String(const std::string &);
         };
 
@@ -137,6 +140,9 @@ namespace alpha {
                         Object *const &         //execution body
                 );
 
+                /**
+                 * for Accessor
+                 */
                 Custom(
                         const Value &,
                         Scope *const &,         //definition scene
