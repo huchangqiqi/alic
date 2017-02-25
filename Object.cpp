@@ -100,6 +100,10 @@ namespace alpha {
                 Object(process->String),
                 value(std::string(size, static_cast<char>(0))) {}
 
+        String::String(const std::string &value) :
+                Object(process->String),
+                value(value) {}
+
         Identifier::Identifier(const std::string &string) :
                 Object(process->Identifier),
                 string(std::move(string)),

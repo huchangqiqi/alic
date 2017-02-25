@@ -97,6 +97,8 @@ namespace alpha {
             std::string value;
 
             String(const unsigned &);
+
+            String(const std::string &);
         };
 
         class Identifier : public Object {
@@ -112,7 +114,8 @@ namespace alpha {
 
         class Procedure : public Object {
         public:
-            typedef FUNCTION((*const Value));
+            typedef FUNCTION((*
+                                     const Value));
 
             const Value value;
 
