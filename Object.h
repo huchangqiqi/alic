@@ -41,7 +41,7 @@ namespace alpha {
             ~Type();
 
             /**
-             * for Process::type_type, Process::procedure_type
+             * for Process::Type, Process::Procedure
              */
             Type();
         };

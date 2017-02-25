@@ -20,4 +20,4 @@ namespace alpha {
     }
 }
 
-#include "MACROS.cpp"
+#include "macros.cpp"

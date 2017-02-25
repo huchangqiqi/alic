@@ -11,7 +11,7 @@
 
 #include "number-generator/number_generator.hpp"
 
-#include "MACROS.h"
+#include "marcos.h"
 
 namespace alpha {
     class Process;

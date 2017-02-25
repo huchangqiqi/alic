@@ -8,9 +8,12 @@ namespace alpha {
     Process *&Functions::process = Process::process;
 
     FUNCTION(Functions::Constructors::type) {
-
-//        object::Procedure *ARGUMENT = ({
-//            if(arguments->type!=process->pair_type)
-//        });
+        if (arguments->type == process->Pair) {
+            Object *arg;
+            {
+                object::Pair *__pair = static_cast<object::Pair *>(arguments);
+                arg = Object::bound(__pair->car);
+            }
+        }
     }
 }

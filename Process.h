@@ -14,17 +14,17 @@ namespace alpha {
         NumberGenerator object_ng, variable_ng;
 
         object::Type
-                *type_type,
-                *null_type,
-                *boolean_type,
-                *number_type,
-                *character_type,
-                *pair_type,
-                *vector_type,
-                *string_type,
-                *identifier_type,
-                *procedure_type,
-                *scope_type;
+                *Type,
+                *Null,
+                *Boolean,
+                *Number,
+                *Character,
+                *Pair,
+                *Vector,
+                *String,
+                *Identifier,
+                *Procedure,
+                *Scope;
         object::Null *null;
         object::Boolean *true_, *false_;
         object::Scope *global;

@@ -10,7 +10,7 @@ namespace alpha {
 
     namespace ejecta {
         Break::Break(const unsigned &scope_sn, Object *const &object) :
-                Ejecta(Type::BREAK),
+                Ejecta(Type::Break),
                 scope_sn(scope_sn),
                 object(Object::bound(object)) {}
 
@@ -19,7 +19,7 @@ namespace alpha {
         }
 
         Throw::Throw(Object *const &object) :
-                Ejecta(Type::THROW),
+                Ejecta(Type::Throw),
                 object(Object::bound(object)) {}
 
         Throw::~Throw() {
@@ -27,7 +27,7 @@ namespace alpha {
         }
 
         Return::Return(const unsigned &procedure_sn, Object *const &object) :
-                Ejecta(Type::RETURN),
+                Ejecta(Type::Return),
                 procedure_sn(procedure_sn),
                 object(object) {}
 
@@ -36,7 +36,7 @@ namespace alpha {
         }
 
         Exit::Exit(Object *const &object) :
-                Ejecta(Type::EXIT),
+                Ejecta(Type::Exit),
                 object(Object::bound(object)) {}
 
         Exit::~Exit() {

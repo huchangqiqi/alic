@@ -12,20 +12,20 @@ namespace alpha {
             variable_ng(1) {
         auto process_backup = useProcess(this);
 
-        type_type = Object::bound(new object::Type());
-        procedure_type = Object::bound(new object::Type());
-        type_type->constructor = Object::bound(new object::Procedure(NULL));
-        procedure_type->constructor = Object::bound(new object::Procedure(NULL));
+        Type = Object::bound(new object::Type());
+        Procedure = Object::bound(new object::Type());
+        Type->constructor = Object::bound(new object::Procedure(NULL));
+        Procedure->constructor = Object::bound(new object::Procedure(NULL));
 
-        null_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        boolean_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        number_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        character_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        pair_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        vector_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        string_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        identifier_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
-        scope_type = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Null = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Boolean = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Number = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Character = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Pair = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Vector = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        String = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Identifier = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
+        Scope = Object::bound(new object::Type(Object::bound(new object::Procedure(NULL))));
 
         null = Object::bound(new object::Null());
         true_ = Object::bound(new object::Boolean(true));
@@ -47,31 +47,31 @@ namespace alpha {
         Object::release(null);
         null = NULL;
 
-        Object::release(scope_type);
-        scope_type = NULL;
-        Object::release(identifier_type);
-        identifier_type = NULL;
-        Object::release(string_type);
-        string_type = NULL;
-        Object::release(vector_type);
-        vector_type = NULL;
-        Object::release(pair_type);
-        pair_type = NULL;
-        Object::release(character_type);
-        character_type = NULL;
-        Object::release(number_type);
-        number_type = NULL;
-        Object::release(boolean_type);
-        boolean_type = NULL;
-        Object::release(null_type);
-        null_type = NULL;
+        Object::release(Scope);
+        Scope = NULL;
+        Object::release(Identifier);
+        Identifier = NULL;
+        Object::release(String);
+        String = NULL;
+        Object::release(Vector);
+        Vector = NULL;
+        Object::release(Pair);
+        Pair = NULL;
+        Object::release(Character);
+        Character = NULL;
+        Object::release(Number);
+        Number = NULL;
+        Object::release(Boolean);
+        Boolean = NULL;
+        Object::release(Null);
+        Null = NULL;
 
-        type_type->constructor->type = NULL;
-        procedure_type->constructor->type = NULL;
-        Object::release(type_type);
-        Object::release(procedure_type, 3);
-        procedure_type = NULL;
-        type_type = NULL;
+        Type->constructor->type = NULL;
+        Procedure->constructor->type = NULL;
+        Object::release(Type);
+        Object::release(Procedure, 3);
+        Procedure = NULL;
+        Type = NULL;
 
         rollbackProcess(process_backup);
 

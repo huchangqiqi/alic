@@ -50,7 +50,7 @@ namespace alpha {
 
     namespace object {
         Type::Type(Procedure *const &constructor) :
-                Object(process->type_type),
+                Object(process->Type),
                 constructor(constructor) {}
 
         Type::~Type() {
@@ -62,22 +62,22 @@ namespace alpha {
                 constructor(NULL) {}
 
         Null::Null() :
-                Object(process->null_type) {}
+                Object(process->Null) {}
 
         Boolean::Boolean(const bool &value) :
-                Object(process->boolean_type),
+                Object(process->Boolean),
                 value(value) {}
 
         Number::Number(const double &value) :
-                Object(process->number_type),
+                Object(process->Number),
                 value(value) {}
 
         Character::Character(const char &value) :
-                Object(process->character_type),
+                Object(process->Character),
                 value(value) {}
 
         Pair::Pair() :
-                Object(process->pair_type),
+                Object(process->Pair),
                 car(bound(process->null)),
                 cdr(bound(process->null)) {}
 
@@ -87,7 +87,7 @@ namespace alpha {
         }
 
         Vector::Vector(const unsigned &size) :
-                Object(process->vector_type),
+                Object(process->Vector),
                 value(std::vector<Object *>(size, bound(process->null, size))) {}
 
         Vector::~Vector() {
@@ -97,11 +97,11 @@ namespace alpha {
         }
 
         String::String(const unsigned &size) :
-                Object(process->string_type),
+                Object(process->String),
                 value(std::string(size, static_cast<char>(0))) {}
 
         Identifier::Identifier(const std::string &string) :
-                Object(process->identifier_type),
+                Object(process->Identifier),
                 string(std::move(string)),
                 variable(NULL) {}
 
@@ -113,7 +113,7 @@ namespace alpha {
         }
 
         Procedure::Procedure(const Value &value) :
-                Object(process->procedure_type),
+                Object(process->Procedure),
                 value(value) {}
 
         namespace procedure {
@@ -148,7 +148,7 @@ namespace alpha {
         }
 
         Scope::Scope(Scope *const base) :
-                Object(process->scope_type),
+                Object(process->Scope),
                 base(bound(base)) {}
 
         Scope::~Scope() {
@@ -168,7 +168,7 @@ namespace alpha {
         }
 
         Scope::Scope() :
-                Object(process->scope_type),
+                Object(process->Scope),
                 base(NULL) {}
     }
 }

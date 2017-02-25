@@ -10,7 +10,7 @@ namespace alpha {
     class Ejecta {
     public:
         enum Type {
-            BREAK, THROW, RETURN, EXIT
+            Break, Throw, Return, Exit
         };
         const Type type;
 
