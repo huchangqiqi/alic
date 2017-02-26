@@ -2,7 +2,7 @@
 // Created by kalo on 2017/2/24.
 //
 
-#include "Functions.h"
+#include "functions.h"
 
 namespace alpha {
     namespace function {

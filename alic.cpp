@@ -2,7 +2,9 @@
 // Created by kalo on 2017/2/23.
 //
 
-#include "Functions.cpp"
+#include "alic.h"
+
+#include "functions.cpp"
 #include "Ejecta.cpp"
 #include "Variable.cpp"
 #include "Object.cpp"

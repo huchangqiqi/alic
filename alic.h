@@ -77,4 +77,4 @@ namespace alpha {
 #include "Object.h"
 #include "Variable.h"
 #include "Ejecta.h"
-#include "Functions.h"
+#include "functions.h"
